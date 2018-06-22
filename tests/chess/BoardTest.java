@@ -2,6 +2,9 @@ package chess;
 
 import org.junit.Before;
 import org.junit.Test;
+import pieces.Piece;
+import util.StringUtil;
+
 import static junit.framework.TestCase.assertEquals;
 
 public class BoardTest {
@@ -15,8 +18,20 @@ public class BoardTest {
 
     @Test
     public void testCreate(){
-        assertEquals(16, board.getNumberOfPieces());
-        assertEquals("pppppppp", board.getSecondRank());
-        assertEquals("PPPPPPPP", board.getSeventhRank());
+        assertEquals(32, board.pieceCount());
+
+        String blankRank = StringUtil.appendNewLine("........");
+        String expectedBoard =  StringUtil.appendNewLine("RNBQKBNR") +
+                                StringUtil.appendNewLine("PPPPPPPP") +
+                                blankRank +
+                                blankRank +
+                                blankRank +
+                                blankRank +
+                                StringUtil.appendNewLine("pppppppp") +
+                                StringUtil.appendNewLine("rnbqkbnr");
+        assertEquals(expectedBoard, board.print());
+
+        assertEquals(16, Piece.getWhiteCount());
+        assertEquals(16, Piece.getBlackCount());
     }
 }

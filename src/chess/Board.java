@@ -27,37 +27,37 @@ public class Board {
 
     public void initialize(){
        for(int i = 0; i < 8; i++) {
-           secondRank.add(Piece.create(Piece.WHITE, "pawn"));
+           secondRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.PAWN));
            numberOfPieces++;
-           seventhRank.add(Piece.create(Piece.BLACK, "pawn"));
+           seventhRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.PAWN));
            numberOfPieces++;
        }
 
-        firstRank.add(Piece.create(Piece.WHITE, "rook"));
-        firstRank.add(Piece.create(Piece.WHITE, "knight"));
-        firstRank.add(Piece.create(Piece.WHITE, "bishop"));
-        firstRank.add(Piece.create(Piece.WHITE, "queen"));
-        firstRank.add(Piece.create(Piece.WHITE, "king"));
-        firstRank.add(Piece.create(Piece.WHITE, "bishop"));
-        firstRank.add(Piece.create(Piece.WHITE, "knight"));
-        firstRank.add(Piece.create(Piece.WHITE, "rook"));
+        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.ROOK));
+        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.KNIGHT));
+        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.BISHOP));
+        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.QUEEN));
+        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.KING));
+        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.BISHOP));
+        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.KNIGHT));
+        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.ROOK));
         numberOfPieces += 8;
 
-        eightRank.add(Piece.create(Piece.BLACK, "rook"));
-        eightRank.add(Piece.create(Piece.BLACK, "knight"));
-        eightRank.add(Piece.create(Piece.BLACK, "bishop"));
-        eightRank.add(Piece.create(Piece.BLACK, "queen"));
-        eightRank.add(Piece.create(Piece.BLACK, "king"));
-        eightRank.add(Piece.create(Piece.BLACK, "bishop"));
-        eightRank.add(Piece.create(Piece.BLACK, "knight"));
-        eightRank.add(Piece.create(Piece.BLACK, "rook"));
+        eightRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.ROOK));
+        eightRank.add(Piece.create(Piece.Color.BLACK,  Piece.Type.KNIGHT));
+        eightRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.BISHOP));
+        eightRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.QUEEN));
+        eightRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.KING));
+        eightRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.BISHOP));
+        eightRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.KNIGHT));
+        eightRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.ROOK));
         numberOfPieces += 8;
     }
 
     public String getFirstRank(){
         StringBuilder sb = new StringBuilder();
         for(Piece p : firstRank) {
-            sb.append(p.getIdentifier());
+            sb.append(p.getRepresentation());
         }
         return sb.toString();
     }
@@ -65,7 +65,7 @@ public class Board {
     public String getSecondRank(){
         StringBuilder sb = new StringBuilder();
         for(Piece p : secondRank) {
-            sb.append(p.getIdentifier());
+            sb.append(p.getRepresentation());
         }
         return sb.toString();
     }
@@ -73,7 +73,7 @@ public class Board {
     public String getSeventhRank(){
         StringBuilder sb = new StringBuilder();
         for(Piece p : seventhRank) {
-            sb.append(p.getIdentifier());
+            sb.append(p.getRepresentation());
         }
         return sb.toString();
     }
@@ -81,7 +81,7 @@ public class Board {
     public String getEightRank(){
         StringBuilder sb = new StringBuilder();
         for(Piece p : eightRank) {
-            sb.append(p.getIdentifier());
+            sb.append(p.getRepresentation());
         }
         return sb.toString();
     }

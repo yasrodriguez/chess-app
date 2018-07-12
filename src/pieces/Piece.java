@@ -1,20 +1,26 @@
 package pieces;
 
-import util.StringUtil;
-
 public class Piece {
-    private String color;
-    public static String WHITE = "white";
-    public static String BLACK = "black";
-    private char identifier;
-    private String name;
+    private Color color;
+    private char representation;
+    private Type type;
     private static int whiteCount;
     private static int blackCount;
+    private static final char PAWN_REPRESENTATION = 'p';
+    private static final char ROOK_REPRESENTATION = 'r';
+    private static final char KNIGHT_REPRESENTATION = 'n';
+    private static final char BISHOP_REPRESENTATION = 'b';
+    private static final char QUEEN_REPRESENTATION = 'q';
+    private static final char KING_REPRESENTATION = 'k';
 
-    private Piece(String color, String name, char identifier){
+    public enum Color {BLACK, WHITE}
+
+    public enum Type {PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING}
+
+    private Piece(Color color, Type type, char representation){
         this.color = color;
-        this.name = name;
-        this.identifier = identifier;
+        this.type = type;
+        this.representation = representation;
         updateCount();
     }
 
@@ -26,12 +32,12 @@ public class Piece {
         }
     }
 
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public char getIdentifier(){
-        return identifier;
+    public char getRepresentation(){
+        return representation;
     }
 
     public static int getWhiteCount(){
@@ -42,31 +48,44 @@ public class Piece {
         return blackCount;
     }
 
-    private static char calculateIdentifier(String color, String name) {
-        if (name.equals("knight")) {
-            if (color.equals(Piece.WHITE)) {
-                return 'n';
-            } else {
-                return 'N';
-            }
+    private static char calculateRepresentation(Color color, Piece.Type type) {
+        char representation = ' ';
+        switch (type) {
+            case PAWN:
+                representation = PAWN_REPRESENTATION;
+                break;
+            case ROOK:
+                representation = ROOK_REPRESENTATION;
+                break;
+            case KNIGHT:
+                representation = KNIGHT_REPRESENTATION;
+                break;
+            case BISHOP:
+                representation = BISHOP_REPRESENTATION;
+                break;
+            case QUEEN:
+                representation = QUEEN_REPRESENTATION;
+                break;
+            case KING:
+                representation = KING_REPRESENTATION;
+                break;
         }
-
-            if (color.equals(Piece.WHITE)) {
-                return StringUtil.getFirstLetterInLowerCase(name);
-            } else {
-                return StringUtil.getFirstLetterInUpperCase(name);
-            }
+        if(color == Color.BLACK) {
+            return Character.toUpperCase(representation);
         }
+        return representation;
+    }
 
-    public static Piece create(String color, String name) {
-        return new Piece(color, name, Piece.calculateIdentifier(color, name));
+
+    public static Piece create(Color color, Piece.Type type) {
+        return new Piece(color, type, Piece.calculateRepresentation(color, type));
     }
 
     public boolean isWhite() {
-        return color.equals(Piece.WHITE);
+        return color == Piece.Color.WHITE;
     }
 
     public boolean isBlack() {
-        return color.equals(Piece.BLACK);
+        return color == Piece.Color.BLACK;
     }
 }

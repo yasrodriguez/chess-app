@@ -10,27 +10,27 @@ public class PieceTest {
     @Test
     public void testCreate(){
 
-        Piece firstPawn = Piece.create(Piece.WHITE,"pawn");
-        assertEquals(Piece.WHITE, firstPawn.getColor());
-        assertEquals(firstPawn.getIdentifier(), 'p');
+        Piece firstPawn = Piece.create(Piece.Color.WHITE,Piece.Type.PAWN);
+        assertEquals(Piece.Color.WHITE, firstPawn.getColor());
+        assertEquals(firstPawn.getRepresentation(), 'p');
 
-        Piece secondPawn = Piece.create(Piece.BLACK, "pawn");
-        assertEquals(Piece.BLACK, secondPawn.getColor());
-        assertEquals(secondPawn.getIdentifier(), 'P');
+        Piece secondPawn = Piece.create(Piece.Color.BLACK, Piece.Type.PAWN);
+        assertEquals(Piece.Color.BLACK, secondPawn.getColor());
+        assertEquals(secondPawn.getRepresentation(), 'P');
     }
 
     @Test
     public void testIsWhite(){
-        Piece firstPiece = Piece.create(Piece.WHITE, "rook");
-        Piece secondPiece =  Piece.create(Piece.BLACK, "queen");
+        Piece firstPiece = Piece.create(Piece.Color.WHITE, Piece.Type.ROOK);
+        Piece secondPiece =  Piece.create(Piece.Color.BLACK, Piece.Type.QUEEN);
         assertTrue(firstPiece.isWhite());
         assertFalse(secondPiece.isWhite());
     }
 
     @Test
     public void testIsBlack(){
-        Piece firstPiece = Piece.create(Piece.WHITE, "rook");
-        Piece secondPiece =  Piece.create(Piece.BLACK, "queen");
+        Piece firstPiece = Piece.create(Piece.Color.WHITE,  Piece.Type.ROOK);
+        Piece secondPiece =  Piece.create(Piece.Color.BLACK, Piece.Type.QUEEN);
         assertFalse(firstPiece.isBlack());
         assertTrue(secondPiece.isBlack());
     }

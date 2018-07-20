@@ -9,29 +9,41 @@ public class PieceTest {
 
     @Test
     public void testCreate(){
+        verifyCreation(Piece.createWhitePawn(), Piece.createBlackPawn(), Piece.Type.PAWN, Piece.PAWN_REPRESENTATION);
+        verifyCreation(Piece.createWhiteRook(), Piece.createBlackRook(), Piece.Type.ROOK, Piece.ROOK_REPRESENTATION);
+        verifyCreation(Piece.createWhiteBishop(), Piece.createBlackBishop(), Piece.Type.BISHOP, Piece.BISHOP_REPRESENTATION);
+        verifyCreation(Piece.createWhiteKnight(), Piece.createBlackKnight(), Piece.Type.KNIGHT, Piece.KNIGHT_REPRESENTATION);
+        verifyCreation(Piece.createWhiteQueen(), Piece.createBlackQueen(), Piece.Type.QUEEN, Piece.QUEEN_REPRESENTATION);
+        verifyCreation(Piece.createWhiteKing(), Piece.createBlackKing(), Piece.Type.KING, Piece.KING_REPRESENTATION);
 
-        Piece firstPawn = Piece.create(Piece.Color.WHITE,Piece.Type.PAWN);
-        assertEquals(Piece.Color.WHITE, firstPawn.getColor());
-        assertEquals(firstPawn.getRepresentation(), 'p');
-
-        Piece secondPawn = Piece.create(Piece.Color.BLACK, Piece.Type.PAWN);
-        assertEquals(Piece.Color.BLACK, secondPawn.getColor());
-        assertEquals(secondPawn.getRepresentation(), 'P');
+        Piece blank = Piece.noPiece();
+        assertEquals('.', blank.getRepresentation());
+        assertEquals(Piece.Type.NO_PIECE, blank.getType());
     }
 
     @Test
     public void testIsWhite(){
-        Piece firstPiece = Piece.create(Piece.Color.WHITE, Piece.Type.ROOK);
-        Piece secondPiece =  Piece.create(Piece.Color.BLACK, Piece.Type.QUEEN);
+        Piece firstPiece = Piece.createWhiteRook();
+        Piece secondPiece =  Piece.createBlackQueen();
         assertTrue(firstPiece.isWhite());
         assertFalse(secondPiece.isWhite());
     }
 
     @Test
     public void testIsBlack(){
-        Piece firstPiece = Piece.create(Piece.Color.WHITE,  Piece.Type.ROOK);
-        Piece secondPiece =  Piece.create(Piece.Color.BLACK, Piece.Type.QUEEN);
+        Piece firstPiece = Piece.createWhiteRook();
+        Piece secondPiece =  Piece.createBlackQueen();
         assertFalse(firstPiece.isBlack());
         assertTrue(secondPiece.isBlack());
+    }
+
+    private static void verifyCreation(Piece whitePiece, Piece blackPiece, Piece.Type type, char representation){
+        assertTrue(whitePiece.isWhite());
+        assertEquals(type, whitePiece.getType());
+        assertEquals(representation, whitePiece.getRepresentation());
+
+        assertTrue(blackPiece.isBlack());
+        assertEquals(type, blackPiece.getType());
+        assertEquals(Character.toUpperCase(representation), blackPiece.getRepresentation());
     }
 }

@@ -27,30 +27,30 @@ public class Board {
 
     public void initialize(){
        for(int i = 0; i < 8; i++) {
-           secondRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.PAWN));
+           secondRank.add(Piece.createWhitePawn());
            numberOfPieces++;
-           seventhRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.PAWN));
+           seventhRank.add(Piece.createBlackPawn());
            numberOfPieces++;
        }
 
-        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.ROOK));
-        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.KNIGHT));
-        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.BISHOP));
-        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.QUEEN));
-        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.KING));
-        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.BISHOP));
-        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.KNIGHT));
-        firstRank.add(Piece.create(Piece.Color.WHITE, Piece.Type.ROOK));
+        firstRank.add(Piece.createWhiteRook());
+        firstRank.add(Piece.createWhiteKnight());
+        firstRank.add(Piece.createWhiteBishop());
+        firstRank.add(Piece.createWhiteQueen());
+        firstRank.add(Piece.createWhiteKing());
+        firstRank.add(Piece.createWhiteBishop());
+        firstRank.add(Piece.createWhiteKnight());
+        firstRank.add(Piece.createWhiteRook());
         numberOfPieces += 8;
 
-        eightRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.ROOK));
-        eightRank.add(Piece.create(Piece.Color.BLACK,  Piece.Type.KNIGHT));
-        eightRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.BISHOP));
-        eightRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.QUEEN));
-        eightRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.KING));
-        eightRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.BISHOP));
-        eightRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.KNIGHT));
-        eightRank.add(Piece.create(Piece.Color.BLACK, Piece.Type.ROOK));
+        eightRank.add(Piece.createBlackRook());
+        eightRank.add(Piece.createBlackKnight());
+        eightRank.add(Piece.createBlackBishop());
+        eightRank.add(Piece.createBlackQueen());
+        eightRank.add(Piece.createBlackKing());
+        eightRank.add(Piece.createBlackBishop());
+        eightRank.add(Piece.createBlackKnight());
+        eightRank.add(Piece.createBlackRook());
         numberOfPieces += 8;
     }
 

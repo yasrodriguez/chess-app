@@ -30,8 +30,12 @@ public class BoardTest {
                                 StringUtil.appendNewLine("pppppppp") +
                                 StringUtil.appendNewLine("rnbqkbnr");
         assertEquals(expectedBoard, board.print());
+    }
 
-        assertEquals(16, Piece.getWhiteCount());
-        assertEquals(16, Piece.getBlackCount());
+    @Test
+    public void testNumberOfPieces(){
+        Board board1 = new Board();
+        assertEquals(8, board1.getNumberOfPieces(Piece.Color.WHITE, Piece.PAWN_REPRESENTATION));
+        assertEquals(2, board1.getNumberOfPieces(Piece.Color.BLACK, Character.toUpperCase(Piece.BISHOP_REPRESENTATION)));
     }
 }

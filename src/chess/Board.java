@@ -55,32 +55,24 @@ public class Board {
     }
 
     public String getFirstRank(){
-        StringBuilder sb = new StringBuilder();
-        for(Piece p : firstRank) {
-            sb.append(p.getRepresentation());
-        }
-        return sb.toString();
+        return getRankRepresentation(firstRank);
     }
 
-    public String getSecondRank(){
-        StringBuilder sb = new StringBuilder();
-        for(Piece p : secondRank) {
-            sb.append(p.getRepresentation());
-        }
-        return sb.toString();
+      public String getSecondRank(){
+        return getRankRepresentation(secondRank);
     }
 
     public String getSeventhRank(){
-        StringBuilder sb = new StringBuilder();
-        for(Piece p : seventhRank) {
-            sb.append(p.getRepresentation());
-        }
-        return sb.toString();
+       return getRankRepresentation(seventhRank);
     }
 
     public String getEightRank(){
+        return getRankRepresentation(eightRank);
+    }
+
+    private String getRankRepresentation(ArrayList<Piece> rank) {
         StringBuilder sb = new StringBuilder();
-        for(Piece p : eightRank) {
+        for(Piece p : rank) {
             sb.append(p.getRepresentation());
         }
         return sb.toString();
@@ -101,5 +93,20 @@ public class Board {
         sb.append(StringUtil.appendNewLine(getSecondRank()));
         sb.append(StringUtil.appendNewLine(getFirstRank()));
         return sb.toString();
+    }
+
+    public int getNumberOfPieces(Piece.Color color, char representation) {
+        return countPieces(firstRank, color, representation) + countPieces(secondRank, color, representation) +
+                countPieces(seventhRank, color, representation) + countPieces(eightRank, color, representation);
+    }
+
+    private int countPieces(ArrayList<Piece> rank, Piece.Color color, char representation) {
+        int count = 0;
+        for(Piece piece : rank){
+            if(piece.getColor() == color && piece.getRepresentation() == representation) {
+                count++;
+            }
+        }
+        return count;
     }
 }

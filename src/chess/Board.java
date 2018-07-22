@@ -11,14 +11,15 @@ public class Board {
     private ArrayList<Piece> secondRank;
     private ArrayList<Piece> seventhRank;
     private ArrayList<Piece> eightRank;
+    private boolean flipped;
 
     public Board(){
         numberOfPieces = 0;
+        flipped = false;
         firstRank = new ArrayList<>();
         secondRank = new ArrayList<>();
         seventhRank = new ArrayList<>();
         eightRank = new ArrayList<>();
-        initialize();
     }
 
     public int pieceCount(){
@@ -100,6 +101,41 @@ public class Board {
                 countPieces(seventhRank, color, representation) + countPieces(eightRank, color, representation);
     }
 
+    public Piece getPiece(String pieceLocation){
+        final int ASCII_OFFSET = Character.getNumericValue('a');
+        int columnAscii = Character.getNumericValue(pieceLocation.charAt(0));
+        int index = columnAscii - ASCII_OFFSET;
+
+        int rankNumber = Integer.valueOf(pieceLocation.substring(1));
+        ArrayList<Piece> rank = getRank(rankNumber);
+
+        return rank.get(index);
+    }
+
+    private ArrayList<Piece> getRank(int rankNumber){
+        int actualRankNumber = rankNumber;
+        if(isFlipped()) {
+            actualRankNumber = Math.abs(actualRankNumber - 8) + 1;
+        }
+
+        ArrayList<Piece> rank = new ArrayList<>();
+        switch(actualRankNumber) {
+            case 1:
+                rank = firstRank;
+                break;
+            case 2:
+                rank = secondRank;
+                break;
+            case 7:
+                rank = seventhRank;
+                break;
+            case 8:
+                rank = eightRank;
+                break;
+        }
+        return rank;
+    }
+
     private int countPieces(ArrayList<Piece> rank, Piece.Color color, char representation) {
         int count = 0;
         for(Piece piece : rank){
@@ -108,5 +144,13 @@ public class Board {
             }
         }
         return count;
+    }
+
+    public void flip(){
+        flipped = true;
+    }
+
+    private boolean isFlipped(){
+        return flipped;
     }
 }

@@ -37,6 +37,15 @@ public class PieceTest {
         assertTrue(secondPiece.isBlack());
     }
 
+    @Test
+    public void testGetRepresentationForType(){
+        Piece piece = Piece.createWhiteRook();
+        assertEquals(Piece.ROOK_REPRESENTATION, piece.getRepresentationForTypeAndColor( piece.getColor(), piece.getType()));
+
+        Piece secondPiece = Piece.createBlackQueen();
+        assertEquals(Character.toUpperCase(Piece.QUEEN_REPRESENTATION), secondPiece.getRepresentationForTypeAndColor(secondPiece.getColor(), secondPiece.getType()));
+    }
+
     private static void verifyCreation(Piece whitePiece, Piece blackPiece, Piece.Type type, char representation){
         assertTrue(whitePiece.isWhite());
         assertEquals(type, whitePiece.getType());
@@ -46,4 +55,5 @@ public class PieceTest {
         assertEquals(type, blackPiece.getType());
         assertEquals(Character.toUpperCase(representation), blackPiece.getRepresentation());
     }
+
 }

@@ -19,16 +19,19 @@ public class BoardTest {
     @Test
     public void testCreate(){
         assertEquals(0, board.pieceCount());
-        board.initialize();
+
         String blankRank = StringUtil.appendNewLine("........");
         String expectedBoard =  StringUtil.appendNewLine("RNBQKBNR") +
-                                StringUtil.appendNewLine("PPPPPPPP") +
-                                blankRank +
-                                blankRank +
-                                blankRank +
-                                blankRank +
-                                StringUtil.appendNewLine("pppppppp") +
-                                StringUtil.appendNewLine("rnbqkbnr");
+                StringUtil.appendNewLine("PPPPPPPP") +
+                blankRank +
+                blankRank +
+                blankRank +
+                blankRank +
+                StringUtil.appendNewLine("pppppppp") +
+                StringUtil.appendNewLine("rnbqkbnr");
+
+        board.initialize();
+
         assertEquals(expectedBoard, board.print());
         assertEquals(32, board.pieceCount());
     }
@@ -36,30 +39,52 @@ public class BoardTest {
     @Test
     public void testNumberOfPieces(){
         board.initialize();
-        assertEquals(8, board.getNumberOfPieces(Piece.Color.WHITE, Piece.PAWN_REPRESENTATION));
-        assertEquals(2, board.getNumberOfPieces(Piece.Color.BLACK, Character.toUpperCase(Piece.BISHOP_REPRESENTATION)));
+        assertEquals(8, board.getNumberOfPiecesForType(Piece.Color.WHITE, Piece.PAWN_REPRESENTATION));
+        assertEquals(2, board.getNumberOfPiecesForType(Piece.Color.BLACK, Character.toUpperCase(Piece.BISHOP_REPRESENTATION)));
     }
 
     @Test
     public void testGetPiece(){
         board.initialize();
 
-        Piece pieceRetrieved = board.getPiece("a8");
+        Piece pieceRetrieved = board.getPieceAtLocation("a8");
         assertEquals(Piece.Type.ROOK, pieceRetrieved.getType());
         assertTrue(pieceRetrieved.isBlack());
 
-        pieceRetrieved = board.getPiece("e1");
+        pieceRetrieved = board.getPieceAtLocation("e1");
         assertEquals(Piece.Type.KING, pieceRetrieved.getType());
         assertTrue(pieceRetrieved.isWhite());
 
         board.flip();
 
-        pieceRetrieved = board.getPiece("a8");
+        pieceRetrieved = board.getPieceAtLocation("a8");
         assertEquals(Piece.Type.ROOK, pieceRetrieved.getType());
         assertTrue(pieceRetrieved.isWhite());
 
-        pieceRetrieved = board.getPiece("e1");
+        pieceRetrieved = board.getPieceAtLocation("e1");
         assertEquals(Piece.Type.KING, pieceRetrieved.getType());
         assertTrue(pieceRetrieved.isBlack());
+    }
+
+    @Test
+    public void testPlacePieces(){
+        assertEquals(0, board.pieceCount());
+
+        board.placePiece(Piece.Color.BLACK, Piece.Type.KING, "b6");
+        board.placePiece(Piece.Color.BLACK, Piece.Type.ROOK, "b5");
+        board.placePiece(Piece.Color.WHITE, Piece.Type.KING, "c4");
+
+        String blankRank = StringUtil.appendNewLine("........");
+        String expectedBoard =  blankRank +
+                blankRank +
+                StringUtil.appendNewLine(".K......") +
+                StringUtil.appendNewLine(".R......") +
+                StringUtil.appendNewLine("..k.....") +
+                blankRank +
+                blankRank +
+                blankRank;
+
+        assertEquals(3, board.pieceCount());
+        assertEquals(expectedBoard, board.print());
     }
 }

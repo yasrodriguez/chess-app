@@ -12,6 +12,7 @@ public class Piece {
     public static final char BISHOP_REPRESENTATION = 'b';
     public static final char QUEEN_REPRESENTATION = 'q';
     public static final char KING_REPRESENTATION = 'k';
+    public static final char NO_PIECE_REPRESENTATION = '.';
 
     public enum Color {BLACK, WHITE}
 
@@ -121,6 +122,35 @@ public class Piece {
     }
 
     public static Piece noPiece(){
-        return new Piece(Type.NO_PIECE, '.');
+        return new Piece(Type.NO_PIECE, NO_PIECE_REPRESENTATION);
     }
-}
+
+    public static char getRepresentationForTypeAndColor(Color color, Type type){
+        char representation = ' ';
+        switch(type) {
+            case PAWN:
+                representation = PAWN_REPRESENTATION;
+                break;
+            case ROOK:
+                representation = ROOK_REPRESENTATION;
+                break;
+            case KNIGHT:
+                representation = KNIGHT_REPRESENTATION;
+                break;
+            case BISHOP:
+                representation = BISHOP_REPRESENTATION;
+                break;
+            case QUEEN:
+                representation = QUEEN_REPRESENTATION;
+                break;
+            case KING:
+                representation = KING_REPRESENTATION;
+                break;
+        }
+         if(color == Color.BLACK) {
+            representation = Character.toUpperCase(representation);
+         }
+        return representation;
+        }
+    }
+

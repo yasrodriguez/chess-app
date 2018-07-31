@@ -87,4 +87,37 @@ public class BoardTest {
         assertEquals(3, board.pieceCount());
         assertEquals(expectedBoard, board.print());
     }
+
+    @Test
+    public void testBoardStrength(){
+        board.placePiece(Piece.Color.WHITE, Piece.Type.QUEEN, "g4");
+        assertEquals(9.0, board.getStrength(Piece.Color.WHITE));
+
+        board.placePiece(Piece.Color.WHITE, Piece.Type.ROOK, "g4");
+        board.placePiece(Piece.Color.WHITE, Piece.Type.ROOK, "e1");
+        board.placePiece(Piece.Color.BLACK, Piece.Type.ROOK, "c8");
+        assertEquals(10.0, board.getStrength(Piece.Color.WHITE));
+        assertEquals(5.0, board.getStrength(Piece.Color.BLACK));
+
+        board.placePiece(Piece.Color.WHITE, Piece.Type.BISHOP, "g4");
+        board.placePiece(Piece.Color.WHITE, Piece.Type.BISHOP, "e1");
+        board.placePiece(Piece.Color.BLACK, Piece.Type.BISHOP, "c8");
+        assertEquals(6.0, board.getStrength(Piece.Color.WHITE));
+        assertEquals(3.0, board.getStrength(Piece.Color.BLACK));
+
+        board.placePiece(Piece.Color.WHITE, Piece.Type.KNIGHT, "g4");
+        board.placePiece(Piece.Color.WHITE, Piece.Type.KNIGHT, "e1");
+        board.placePiece(Piece.Color.BLACK, Piece.Type.KNIGHT, "c8");
+        board.placePiece(Piece.Color.BLACK, Piece.Type.KNIGHT, "b8");
+        assertEquals(5.0, board.getStrength(Piece.Color.WHITE));
+        assertEquals(5.0, board.getStrength(Piece.Color.BLACK));
+
+        board.placePiece(Piece.Color.WHITE, Piece.Type.PAWN, "g4");
+        board.placePiece(Piece.Color.WHITE, Piece.Type.PAWN, "e1");
+        board.placePiece(Piece.Color.BLACK, Piece.Type.PAWN, "c8");
+        board.placePiece(Piece.Color.BLACK, Piece.Type.PAWN, "b8");
+        board.placePiece(Piece.Color.BLACK, Piece.Type.PAWN, "b5");
+        assertEquals(2.0, board.getStrength(Piece.Color.WHITE));
+        assertEquals(2.0, board.getStrength(Piece.Color.BLACK));
+    }
 }

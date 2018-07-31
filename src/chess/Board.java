@@ -143,15 +143,15 @@ public class Board {
         int rankNumber = getRankNumber(pieceLocation);
         ArrayList<Piece> rank = getRank(rankNumber);
 
-        int index = getIndex(pieceLocation);
-        return rank.get(index);
+        int fileNumber = getFileNumber(pieceLocation);
+        return rank.get(fileNumber);
     }
 
     private int getRankNumber(String location) {
         return Integer.valueOf(location.substring(1));
     }
 
-    private int getIndex(String location) {
+    private int getFileNumber(String location) {
         final int ASCII_OFFSET = Character.getNumericValue('a');
         int columnAscii = Character.getNumericValue(location.charAt(0));
         return columnAscii - ASCII_OFFSET;
@@ -215,9 +215,77 @@ public class Board {
         int rankNumber = getRankNumber(location);
         ArrayList<Piece> rank = getRank(rankNumber);
 
-        int index = getIndex(location);
+        int fileNumber = getFileNumber(location);
 
-        rank.set(index, Piece.create(color, type, Piece.getRepresentationForTypeAndColor(color, type)));
+        rank.set(fileNumber, Piece.create(color, type, Piece.getRepresentationForTypeAndColor(color, type)));
         numberOfPieces++;
+    }
+
+    public double getStrength(Piece.Color color) {
+        double points = 0;
+        points += calculateStrength(firstRank, color);
+        points += calculateStrength(secondRank, color);
+        points += calculateStrength(thirdRank, color);
+        points += calculateStrength(fourthRank, color);
+        points += calculateStrength(fifthRank, color);
+        points += calculateStrength(sixthRank, color);
+        points += calculateStrength(seventhRank, color);
+        points += calculateStrength(eightRank, color);
+
+        points += calculatePawnStrength("a", color);
+        points += calculatePawnStrength("b", color);
+        points += calculatePawnStrength("c", color);
+        points += calculatePawnStrength("d", color);
+        points += calculatePawnStrength("e", color);
+        points += calculatePawnStrength("f", color);
+        points += calculatePawnStrength("g", color);
+        points += calculatePawnStrength("h", color);
+
+        return points;
+    }
+
+    private double calculatePawnStrength(String file, Piece.Color color) {
+        double pawnCount = 0;
+        int fileNumber = getFileNumber(file);
+
+
+        pawnCount += firstRank.get(fileNumber).getType() == Piece.Type.PAWN && firstRank.get(fileNumber).getColor() == color ? 1 : 0;
+        pawnCount += secondRank.get(fileNumber).getType() == Piece.Type.PAWN && secondRank.get(fileNumber).getColor() == color ? 1 : 0;
+        pawnCount += thirdRank.get(fileNumber).getType() == Piece.Type.PAWN && thirdRank.get(fileNumber).getColor() == color ? 1 : 0;
+        pawnCount += fourthRank.get(fileNumber).getType() == Piece.Type.PAWN && fourthRank.get(fileNumber).getColor() == color ? 1 : 0;
+        pawnCount += fifthRank.get(fileNumber).getType() == Piece.Type.PAWN && fifthRank.get(fileNumber).getColor() == color ? 1 : 0;
+        pawnCount += sixthRank.get(fileNumber).getType() == Piece.Type.PAWN && sixthRank.get(fileNumber).getColor() == color ? 1 : 0;
+        pawnCount += seventhRank.get(fileNumber).getType() == Piece.Type.PAWN && seventhRank.get(fileNumber).getColor() == color ? 1 : 0;
+        pawnCount += eightRank.get(fileNumber).getType() == Piece.Type.PAWN && eightRank.get(fileNumber).getColor() == color ? 1 : 0;
+
+        if(pawnCount == 1) {
+            return 1;
+        } else {
+            return 0.5 * pawnCount;
+        }
+    }
+
+
+    private double calculateStrength(ArrayList<Piece> rank, Piece.Color color) {
+        double points = 0;
+        for(Piece piece : rank) {
+            if(piece.getColor() == color) {
+                switch(piece.getType()) {
+                    case QUEEN:
+                        points += 9;
+                        break;
+                    case ROOK:
+                        points += 5;
+                        break;
+                    case BISHOP:
+                        points += 3;
+                        break;
+                    case KNIGHT:
+                        points += 2.5;
+                        break;
+                }
+            }
+        }
+        return points;
     }
 }

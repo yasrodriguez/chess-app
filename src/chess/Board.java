@@ -221,7 +221,7 @@ public class Board {
         numberOfPieces++;
     }
 
-    public double getStrength(Piece.Color color) {
+    public double calculateStrength(Piece.Color color) {
         double points = 0;
         points += calculateStrength(firstRank, color);
         points += calculateStrength(secondRank, color);
@@ -267,25 +267,28 @@ public class Board {
 
 
     private double calculateStrength(ArrayList<Piece> rank, Piece.Color color) {
-        double points = 0;
+        double totalPoints = 0;
         for(Piece piece : rank) {
+            double points = 0;
             if(piece.getColor() == color) {
                 switch(piece.getType()) {
                     case QUEEN:
-                        points += 9;
+                        points = 9;
                         break;
                     case ROOK:
-                        points += 5;
+                        points = 5;
                         break;
                     case BISHOP:
-                        points += 3;
+                        points = 3;
                         break;
                     case KNIGHT:
-                        points += 2.5;
+                        points = 2.5;
                         break;
                 }
+                totalPoints += points;
+                piece.setStrength(points);
             }
         }
-        return points;
+        return totalPoints;
     }
 }

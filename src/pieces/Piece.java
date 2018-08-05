@@ -4,6 +4,7 @@ public class Piece {
     private Color color;
     private char representation;
     private Type type;
+    private double strength;
     private static int whiteCount;
     private static int blackCount;
     public static final char PAWN_REPRESENTATION = 'p';
@@ -13,6 +14,13 @@ public class Piece {
     public static final char QUEEN_REPRESENTATION = 'q';
     public static final char KING_REPRESENTATION = 'k';
     public static final char NO_PIECE_REPRESENTATION = '.';
+    public static final double ROOK_STRENGTH = 5;
+    public static final double QUEEN_STRENGTH = 9;
+    public static final double KING_STRENGTH = 0;
+    public static final double BISHOP_STRENGTH = 3;
+    public static final double KNIGHT_STRENGTH = 2.5;
+    public static final double LONE_PAWN_STRENGTH = 1;
+    public static final double MULTIPLE_PAWN_STRENGTH = 0.5;
 
     public enum Color {BLACK, WHITE}
 
@@ -22,6 +30,7 @@ public class Piece {
         this.color = color;
         this.type = type;
         this.representation = representation;
+        this.strength = 0;
         updateCount();
     }
 
@@ -152,5 +161,13 @@ public class Piece {
          }
         return representation;
         }
+
+    public double getStrength() {
+       return strength;
     }
+
+    public void setStrength(double strength) {
+        this.strength = strength;
+    }
+}
 
